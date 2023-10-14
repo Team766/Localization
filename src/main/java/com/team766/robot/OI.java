@@ -25,7 +25,7 @@ public class OI extends Procedure {
 		// joystick2 = RobotProvider.instance.getJoystick(2);
 	}
 
-	public void run(final Context context) {
+	public void run(Context context) {
 		context.takeOwnership(Robot.vision);
 		while (true) {
 			// wait for driver station data (and refresh it using the WPILib APIs)

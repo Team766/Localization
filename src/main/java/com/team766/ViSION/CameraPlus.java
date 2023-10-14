@@ -4,7 +4,6 @@ import java.util.*;
 import org.photonvision.PhotonCamera;
 import org.photonvision.targeting.PhotonTrackedTarget;
 import com.team766.framework.AprilTagGeneralCheckedException;
-import edu.wpi.first.*;
 import edu.wpi.first.math.geometry.Transform3d;
 
 public class CameraPlus extends PhotonCamera{

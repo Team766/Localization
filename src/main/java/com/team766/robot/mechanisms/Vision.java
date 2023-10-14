@@ -11,6 +11,8 @@ import org.photonvision.EstimatedRobotPose;
 public class Vision extends Mechanism{
 
 	Pose3d latestPose;
+
+	PoseEstimator poseEstimator = new PoseEstimator();
 	
 	public Vision(){
 
@@ -19,7 +21,7 @@ public class Vision extends Mechanism{
 
 	public double getX(){
 		Optional<EstimatedRobotPose> poseList;
-		poseList = PoseEstimator.getEstimatedGlobalPose();
+		poseList = poseEstimator.getEstimatedGlobalPose();
 
 		if(poseList.isPresent()){
 			EstimatedRobotPose estimatedPose = poseList.get();
@@ -33,7 +35,7 @@ public class Vision extends Mechanism{
 
 	public double getY(){
 		Optional<EstimatedRobotPose> poseList;
-		poseList = PoseEstimator.getEstimatedGlobalPose();
+		poseList = poseEstimator.getEstimatedGlobalPose();
 
 		if(poseList.isPresent()){
 			EstimatedRobotPose estimatedPose = poseList.get();

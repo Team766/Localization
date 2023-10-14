@@ -9,26 +9,30 @@ import edu.wpi.first.math.geometry.Transform3d;
 
 
 public class PoseEstimator {
-	public static PhotonPoseEstimator pEstimatorCam1 = new PhotonPoseEstimator(
-		SWingFieldTemplate.getFieldLayout(),
+	SWingFieldTemplate sWingFieldTemplate = new SWingFieldTemplate();
+	
+	public PhotonPoseEstimator pEstimatorCam1 = new PhotonPoseEstimator(
+		sWingFieldTemplate.getFieldLayout(),
 		PoseStrategy.LOWEST_AMBIGUITY,
 		(PhotonCamera) Cameras.camera1,
 		new Transform3d());
 
-	public PhotonPoseEstimator pEstimatorCam2 = new PhotonPoseEstimator(SWingFieldTemplate.getFieldLayout(), 
+	public PhotonPoseEstimator pEstimatorCam2 = new PhotonPoseEstimator(sWingFieldTemplate.getFieldLayout(), 
 		PoseStrategy.LOWEST_AMBIGUITY, 
 		(PhotonCamera) Cameras.camera2, 
 		new Transform3d());
 
-	public PhotonPoseEstimator pEstimatorCam3 = new PhotonPoseEstimator(SWingFieldTemplate.getFieldLayout(),
+	public PhotonPoseEstimator pEstimatorCam3 = new PhotonPoseEstimator(sWingFieldTemplate.getFieldLayout(),
 		PoseStrategy.LOWEST_AMBIGUITY, 
 		(PhotonCamera) Cameras.camera3, 
 		new Transform3d());
 
 	// ie. run loop
-	
+	public PoseEstimator(){
 
-	public static Optional<EstimatedRobotPose> getEstimatedGlobalPose() {
+	}
+
+	public Optional<EstimatedRobotPose> getEstimatedGlobalPose() {
 		return pEstimatorCam1.update();
 	}
 
