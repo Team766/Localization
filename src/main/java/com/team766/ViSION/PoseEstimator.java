@@ -1,5 +1,7 @@
 package com.team766.ViSION;
 
+import java.util.Optional;
+import org.photonvision.EstimatedRobotPose;
 import org.photonvision.PhotonCamera;
 import org.photonvision.PhotonPoseEstimator;
 import org.photonvision.PhotonPoseEstimator.PoseStrategy;
@@ -7,7 +9,7 @@ import edu.wpi.first.math.geometry.Transform3d;
 
 
 public class PoseEstimator {
-	public PhotonPoseEstimator pEstimatorCam1 = new PhotonPoseEstimator(
+	public static PhotonPoseEstimator pEstimatorCam1 = new PhotonPoseEstimator(
 		SWingFieldTemplate.getFieldLayout(),
 		PoseStrategy.LOWEST_AMBIGUITY,
 		(PhotonCamera) Cameras.camera1,
@@ -22,4 +24,12 @@ public class PoseEstimator {
 		PoseStrategy.LOWEST_AMBIGUITY, 
 		(PhotonCamera) Cameras.camera3, 
 		new Transform3d());
+
+	// ie. run loop
+	
+
+	public static Optional<EstimatedRobotPose> getEstimatedGlobalPose() {
+		return pEstimatorCam1.update();
+	}
+
 }
