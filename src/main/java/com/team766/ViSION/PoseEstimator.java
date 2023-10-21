@@ -10,9 +10,8 @@ import edu.wpi.first.math.geometry.Transform3d;
 
 public class PoseEstimator {
 	SWingFieldTemplate sWingFieldTemplate = new SWingFieldTemplate();
-	
-	public PhotonPoseEstimator pEstimatorCam1 = new PhotonPoseEstimator(
-		sWingFieldTemplate.getFieldLayout(),
+
+	public PhotonPoseEstimator pEstimatorCam1 = new PhotonPoseEstimator(sWingFieldTemplate.getFieldLayout(),
 		PoseStrategy.LOWEST_AMBIGUITY,
 		(PhotonCamera) Cameras.camera1,
 		new Transform3d());
