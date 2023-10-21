@@ -13,25 +13,35 @@ import edu.wpi.first.wpilibj.DriverStation;
  * interface to the code that allow control of the robot.
  */
 public class OI extends Procedure {
-	// private JoystickReader joystick0;
+	private JoystickReader joystick0;
 	// private JoystickReader joystick1;
 	// private JoystickReader joystick2;
 
 	public OI() {
 		loggerCategory = Category.OPERATOR_INTERFACE;
 
-		// joystick0 = RobotProvider.instance.getJoystick(0);
+		joystick0 = RobotProvider.instance.getJoystick(0);
 		// joystick1 = RobotProvider.instance.getJoystick(1);
 		// joystick2 = RobotProvider.instance.getJoystick(2);
 	}
 
 	public void run(Context context) {
 		context.takeOwnership(Robot.vision);
+		context.takeOwnership(Robot.lights);
 		while (true) {
 			// wait for driver station data (and refresh it using the WPILib APIs)
 			context.waitFor(() -> RobotProvider.instance.hasNewDriverStationData());
-			RobotProvider.instance.refreshDriverStationData();
+			RobotProvider.instance.refreshDriverStationData();	
 
+			if(joystick0.getButtonPressed(1)){
+				Robot.lights.purple();
+			}
+			if(joystick0.getButtonPressed(2)){
+				Robot.lights.white();
+			}
+			if(joystick0.getButtonPressed(3)){
+				Robot.lights.yellow();
+			}
 			log("X: " + Robot.vision.getX() + " Y: " + Robot.vision.getY());
 
 			// Add driver controls here - make sure to take/release ownership

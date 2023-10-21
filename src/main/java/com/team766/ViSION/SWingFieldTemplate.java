@@ -32,7 +32,7 @@ public class SWingFieldTemplate {
 			tagList.add(new AprilTag(tag2ID, tag2Pose));
 
 			
-			SWingField = new AprilTagFieldLayout(null, fieldLength, fieldWidth);
+			SWingField = new AprilTagFieldLayout(tagList, fieldLength, fieldWidth);
 
 			added = true;
 		}
