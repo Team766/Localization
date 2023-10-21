@@ -26,9 +26,20 @@ public class PoseEstimator {
 		(PhotonCamera) Cameras.camera3, 
 		new Transform3d());
 
-	// ie. run loop
-	public PoseEstimator(){
+	
+	public PhotonPoseEstimator combined1And2 = new PhotonPoseEstimator(sWingFieldTemplate.getFieldLayout(),
+		PoseStrategy.CLOSEST_TO_REFERENCE_POSE, 
+		(PhotonCamera) Cameras.camera1, 
+		new Transform3d());
 
+	
+	public PoseEstimator(){
+		
+	}
+
+	public Optional<EstimatedRobotPose> getCombinedPose(){
+		combined1And2.setReferencePose(pEstimatorCam2.getReferencePose());
+		return combined1And2.update();
 	}
 
 	public Optional<EstimatedRobotPose> getEstimatedGlobalPose() {
