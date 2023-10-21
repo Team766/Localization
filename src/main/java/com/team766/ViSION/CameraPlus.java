@@ -8,6 +8,11 @@ import edu.wpi.first.math.geometry.Transform3d;
 
 public class CameraPlus extends PhotonCamera{
 
+	/*
+	 * This is the constructor for the CameraPlus class
+	 * @param cameraName the name of the camera
+	 * @extends the PhotonCamera class and supers the cameraName
+	 */
 	public CameraPlus(String cameraName) {
 		super(cameraName);
 	}
@@ -41,12 +46,16 @@ public class CameraPlus extends PhotonCamera{
 		}
 	}
 
+	/*
+	 * This method gets the best tracked target picked up by the camera
+	 * @return PhotonTrackedTarget the best tracked target picked up by the camera
+	 */
 	public PhotonTrackedTarget getBestTrackedTarget() throws AprilTagGeneralCheckedException{
         var result = getLatestResult(); //getting the result from the camera
         boolean hasTargets = result.hasTargets(); // checking to see if there are any targets in the camera's view. IF THERE ISN'T AND YOU USE result.getTargets() YOU WILL GET AN ERROR
 
         if(hasTargets){
-            List<PhotonTrackedTarget> targets = result.getTargets(); // getting targets
+            //List<PhotonTrackedTarget> targets = result.getTargets(); // getting targets
 
             PhotonTrackedTarget bestTrackedTarget = result.getBestTarget(); // getting the best target that is currently being picked up by the camera so that it can know where it is
             return bestTrackedTarget;
@@ -56,6 +65,11 @@ public class CameraPlus extends PhotonCamera{
         }
     }
 
+	/*
+	 * This method gets the transform 3d of the best target picked up by the camera
+	 * @param target the target that you want to get the transform 3d of
+	 * @return Transform3d the transform 3d of the target
+	 */
 	public Transform3d getBestTargetTransform3d(PhotonTrackedTarget target){
         return target.getBestCameraToTarget();
     }
