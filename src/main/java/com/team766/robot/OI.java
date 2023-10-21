@@ -34,13 +34,13 @@ public class OI extends Procedure {
 			RobotProvider.instance.refreshDriverStationData();	
 
 			if(joystick0.getButtonPressed(1)){
-				Robot.lights.purple();
+				Robot.lights.signalCube();
 			}
 			if(joystick0.getButtonPressed(2)){
-				Robot.lights.white();
+				Robot.lights.signalCone();
 			}
 			if(joystick0.getButtonPressed(3)){
-				Robot.lights.yellow();
+				Robot.lights.signalBalance();
 			}
 			log("X: " + Robot.vision.getX() + " Y: " + Robot.vision.getY());
 
