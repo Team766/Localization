@@ -1,6 +1,7 @@
 package com.team766.robot;
 
 import com.team766.framework.Procedure;
+import java.sql.Driver;
 import com.team766.framework.Context;
 import com.team766.hal.JoystickReader;
 import com.team766.hal.RobotProvider;
@@ -16,6 +17,8 @@ public class OI extends Procedure {
 	private JoystickReader joystick0;
 	// private JoystickReader joystick1;
 	// private JoystickReader joystick2;
+	int state = 0;
+	boolean ignoreState = false;
 
 	public OI() {
 		loggerCategory = Category.OPERATOR_INTERFACE;
@@ -33,16 +36,49 @@ public class OI extends Procedure {
 			context.waitFor(() -> RobotProvider.instance.hasNewDriverStationData());
 			RobotProvider.instance.refreshDriverStationData();	
 
+			if(DriverStation.getMatchTime() < 30 && DriverStation.getMatchTime() > 28){
+				Robot.lights.rainbow();
+				log("" + DriverStation.getMatchTime());
+				ignoreState = true;
+			}
+
+			if(DriverStation.getMatchTime() <28 && DriverStation.getMatchTime() > 27.7){
+				Robot.lights.clearAnimation();
+				ignoreState = false;
+			}
+
+			
+			
 			if(joystick0.getButtonPressed(1)){
-				Robot.lights.signalCube();
+				state = 1;
 			}
 			if(joystick0.getButtonPressed(2)){
-				Robot.lights.signalCone();
+				state = 2;
 			}
-			if(joystick0.getButtonPressed(3)){
-				Robot.lights.signalBalance();
+			if(DriverStation.getMatchTime() < 5){
+				state = 3;
 			}
-			log("X: " + Robot.vision.getX() + " Y: " + Robot.vision.getY());
+
+			switch (state){
+				case 1:
+					if(ignoreState){ break;}
+					Robot.lights.signalCube();
+					break;
+				case 2:
+					if(ignoreState){ break;}
+					Robot.lights.signalCone();
+					break;
+				case 3:
+					if(ignoreState){ break;}
+					Robot.lights.rainbow();
+					break;
+				default:
+					if(!ignoreState){
+					Robot.lights.resetLights();
+					}
+			}
+
+			//log("X: " + Robot.vision.getX() + " Y: " + Robot.vision.getY());
 
 			// Add driver controls here - make sure to take/release ownership
 			// of mechanisms when appropriate.

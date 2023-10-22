@@ -6,8 +6,8 @@ package com.team766.ViSION;
  */
 public class Cameras {
 	
-	public static final CameraPlus camera1 = new CameraPlus("photonCamera1");
-	public static final CameraPlus camera2 = new CameraPlus("photonCamera2");
-	public static final CameraPlus camera3 = new CameraPlus("photonCamera3");
+	public static final CameraPlus camera1 = new CameraPlus("PhotonCamera1");
+	public static final CameraPlus camera2 = new CameraPlus("PhotonCamera2");
+	public static final CameraPlus camera3 = new CameraPlus("PhotonCamera3");
 
 }

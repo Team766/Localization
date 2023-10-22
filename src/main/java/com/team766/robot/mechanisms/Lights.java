@@ -1,7 +1,12 @@
 package com.team766.robot.mechanisms;
+import org.apache.commons.math3.stat.correlation.StorelessCovariance;
 import com.ctre.phoenix.led.CANdle;
 import com.ctre.phoenix.led.RainbowAnimation;
+import com.ctre.phoenix.led.StrobeAnimation;
+import com.ctre.phoenix.led.TwinkleAnimation;
+import com.ctre.phoenix.led.TwinkleAnimation.TwinklePercent;
 import com.team766.framework.Mechanism;
+import edu.wpi.first.wpilibj.DriverStation;
 
 
 public class Lights extends Mechanism{
@@ -10,7 +15,8 @@ public class Lights extends Mechanism{
 	private static final int CANID = 5;
 	private int numLEDs = 42;
 	RainbowAnimation rainbowAnim = new RainbowAnimation(1, 5, numLEDs);
-
+	
+	int curAnimation = -1;
 	public Lights(){
 		candle = new CANdle(CANID);
 
@@ -24,8 +30,25 @@ public class Lights extends Mechanism{
 
 	public void signalCube(){
 		checkContextOwnership();
-		candle.clearAnimation(0);
-		candle.setLEDs(128, 0, 128);
+		if(DriverStation.getMatchTime() > 30){
+			if(curAnimation != -1){candle.clearAnimation(curAnimation);}
+			candle.setLEDs(128, 0, 128);
+		}else{
+			candle.clearAnimation(curAnimation);
+			if(DriverStation.getMatchTime() > 15){
+				if((int) (DriverStation.getMatchTime() * 2) % 2 == 0){
+					candle.setLEDs(128, 0, 128);
+				}else{
+					candle.setLEDs(0, 0, 0);
+				}
+			}else{
+				if((int) (DriverStation.getMatchTime() * 4) % 2 == 0){
+					candle.setLEDs(128, 0, 128);
+				}else{
+					candle.setLEDs(0, 0, 0);
+				}
+			}
+		}
 	}
 
 	public void resetLights(){
@@ -35,18 +58,52 @@ public class Lights extends Mechanism{
 
 	public void signalCone(){
 		checkContextOwnership();
-		candle.clearAnimation(0);
-		candle.setLEDs(255, 255, 0);
+		if(DriverStation.getMatchTime() > 30){
+			if(curAnimation != -1){candle.clearAnimation(curAnimation);}
+			candle.setLEDs(255, 255, 0);
+		}else{
+			candle.clearAnimation(curAnimation);
+			if(DriverStation.getMatchTime() > 15){
+				if((int) (DriverStation.getMatchTime() * 2) % 2 == 0){
+					candle.setLEDs(225, 225, 0);
+				}else{
+					candle.setLEDs(0, 0, 0);
+				}
+			}else{
+				if((int) (DriverStation.getMatchTime() * 4) % 2 == 0){
+					candle.setLEDs(225,225,0);
+				}else{
+					candle.setLEDs(0, 0, 0);
+				}
+			}
+		}
+
 	}
 
+	public void auton(){
+		candle.setLEDs(0, 255, 0);
+	}
 	public void signalMalfunction(){
 		checkContextOwnership();
 		candle.setLEDs(255, 0, 0);
 	}
 
-	public void signalBalance(){
+	public void rainbow(){
 		checkContextOwnership();
+		candle.clearAnimation(curAnimation);
 		candle.animate(rainbowAnim,0);
+		curAnimation = 0;
+		
+	}
+
+	public void clearAnimation(){
+		checkContextOwnership();
+		if(curAnimation != -1){
+			candle.clearAnimation(curAnimation);
+			curAnimation = -1;
+		}
+		
+		
 		
 	}
 }
