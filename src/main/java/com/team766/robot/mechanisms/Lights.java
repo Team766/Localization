@@ -1,4 +1,5 @@
 package com.team766.robot.mechanisms;
+import org.apache.commons.math3.analysis.function.Ceil;
 import org.apache.commons.math3.stat.correlation.StorelessCovariance;
 import com.ctre.phoenix.led.CANdle;
 import com.ctre.phoenix.led.RainbowAnimation;
@@ -106,4 +107,78 @@ public class Lights extends Mechanism{
 		
 		
 	}
+
+	public void hybridScore(){
+		checkContextOwnership();
+
+		if(DriverStation.getMatchTime() > 30){
+			if(curAnimation != -1){candle.clearAnimation(curAnimation);}
+			candle.setLEDs(165, 128, 65);
+		}else{
+			candle.clearAnimation(curAnimation);
+			if(DriverStation.getMatchTime() > 15){
+				if((int) (DriverStation.getMatchTime() * 2) % 2 == 0){
+					candle.setLEDs(165, 128, 65);
+				}else{
+					candle.setLEDs(0, 0, 0);
+				}
+			}else{
+				if((int) (DriverStation.getMatchTime() * 4) % 2 == 0){
+					candle.setLEDs(165, 128, 65);
+				}else{
+					candle.setLEDs(0, 0, 0);
+				}
+			}
+		}
+	}
+
+	//color of justin and kapils shirts
+	public void midScore(){
+		checkContextOwnership();
+
+		if(DriverStation.getMatchTime() > 30){
+			if(curAnimation != -1){candle.clearAnimation(curAnimation);}
+			candle.setLEDs(81,102,52);
+		}else{
+			candle.clearAnimation(curAnimation);
+			if(DriverStation.getMatchTime() > 15){
+				if((int) (DriverStation.getMatchTime() * 2) % 2 == 0){
+					candle.setLEDs(81,102,52);
+				}else{
+					candle.setLEDs(0, 0, 0);
+				}
+			}else{
+				if((int) (DriverStation.getMatchTime() * 4) % 2 == 0){
+					candle.setLEDs(81,102,52);
+				}else{
+					candle.setLEDs(0, 0, 0);
+				}
+			}
+		}
+	}
+
+	public void highScore(){
+		checkContextOwnership();
+
+		if(DriverStation.getMatchTime() > 30){
+			if(curAnimation != -1){candle.clearAnimation(curAnimation);}
+			candle.setLEDs(202, 39, 75);
+		}else{
+			candle.clearAnimation(curAnimation);
+			if(DriverStation.getMatchTime() > 15){
+				if((int) (DriverStation.getMatchTime() * 2) % 2 == 0){
+					candle.setLEDs(202, 39, 75);
+				}else{
+					candle.setLEDs(0, 0, 0);
+				}
+			}else{
+				if((int) (DriverStation.getMatchTime() * 4) % 2 == 0){
+					candle.setLEDs(202, 39, 75);
+				}else{
+					candle.setLEDs(0, 0, 0);
+				}
+			}
+		}
+	}
+
 }

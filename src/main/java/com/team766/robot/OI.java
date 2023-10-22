@@ -36,13 +36,13 @@ public class OI extends Procedure {
 			context.waitFor(() -> RobotProvider.instance.hasNewDriverStationData());
 			RobotProvider.instance.refreshDriverStationData();	
 
-			if(DriverStation.getMatchTime() < 30 && DriverStation.getMatchTime() > 28){
+			if(DriverStation.getMatchTime() < 30 && DriverStation.getMatchTime() > 29){
 				Robot.lights.rainbow();
 				log("" + DriverStation.getMatchTime());
 				ignoreState = true;
 			}
 
-			if(DriverStation.getMatchTime() <28 && DriverStation.getMatchTime() > 27.7){
+			if(DriverStation.getMatchTime() <29 && DriverStation.getMatchTime() > 28.7){
 				Robot.lights.clearAnimation();
 				ignoreState = false;
 			}
@@ -58,6 +58,15 @@ public class OI extends Procedure {
 			if(DriverStation.getMatchTime() < 5){
 				state = 3;
 			}
+			if(joystick0.getButtonPressed(3)){
+				state = 4;
+			}
+			if(joystick0.getButtonPressed(4)){
+				state = 5;
+			}
+			if(joystick0.getButtonPressed(5)){
+				state = 6;
+			}
 
 			switch (state){
 				case 1:
@@ -71,6 +80,18 @@ public class OI extends Procedure {
 				case 3:
 					if(ignoreState){ break;}
 					Robot.lights.rainbow();
+					break;
+				case 4:
+					if(ignoreState){ break;}
+					Robot.lights.hybridScore();
+					break;
+				case 5:
+					if(ignoreState){ break;}
+					Robot.lights.midScore();
+					break;
+				case 6:
+					if(ignoreState){ break;}
+					Robot.lights.highScore();
 					break;
 				default:
 					if(!ignoreState){
