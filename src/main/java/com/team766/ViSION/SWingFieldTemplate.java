@@ -19,7 +19,7 @@ public class SWingFieldTemplate {
 	private Rotation3d tag2Rotation = new Rotation3d(0,0,-90); 
 
 	private Pose3d tag1Pose = new Pose3d(2.86385,0,0.49,  tag1Rotation); //find correct values later
-	private Pose3d tag2Pose = new Pose3d(2.86385,5.842,0.49, tag2Rotation); //find correct values later
+	private Pose3d tag2Pose = new Pose3d(2.86385,5.7277,0.49, tag2Rotation); //find correct values later
 
 	private List<AprilTag> tagList = new ArrayList<AprilTag>();
 	public AprilTagFieldLayout SWingField;
