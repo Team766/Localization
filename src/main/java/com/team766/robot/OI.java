@@ -37,6 +37,58 @@ public class OI extends Procedure {
 			RobotProvider.instance.refreshDriverStationData();	
 
 			
+			
+			if(joystick0.getButtonPressed(1)){
+				state = 1;
+			}
+			if(joystick0.getButtonPressed(2)){
+				state = 2;
+			}
+			if(DriverStation.getMatchTime() < 5){
+				state = 3;
+			}
+			if(joystick0.getButtonPressed(3)){
+				state = 4;
+			}
+			if(joystick0.getButtonPressed(4)){
+				state = 5;
+			}
+			if(joystick0.getButtonPressed(5)){
+				state = 6;
+			}
+
+			switch (state){
+				case 1:
+					if(ignoreState){ break;}
+					Robot.lights.signalCube();
+					break;
+				case 2:
+					if(ignoreState){ break;}
+					Robot.lights.signalCone();
+					break;
+				case 3:
+					if(ignoreState){ break;}
+					Robot.lights.rainbow();
+					break;
+				case 4:
+					if(ignoreState){ break;}
+					Robot.lights.hybridScore();
+					break;
+				case 5:
+					if(ignoreState){ break;}
+					Robot.lights.midScore();
+					break;
+				case 6:
+					if(ignoreState){ break;}
+					Robot.lights.highScore();
+					break;
+				default:
+					if(!ignoreState){
+					Robot.lights.resetLights();
+					}
+			}
+
+			//log("X: " + Robot.vision.getX() + " Y: " + Robot.vision.getY());
 
 			log("X: " + Robot.vision.getX() + " Y: " + Robot.vision.getY());
 
