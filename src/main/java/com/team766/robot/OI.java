@@ -79,7 +79,7 @@ public class OI extends Procedure {
 					break;
 				case 3:
 					if(ignoreState){ break;}
-					Robot.lights.rainbow();
+					Robot.lights.rainbowFast();
 					break;
 				case 4:
 					if(ignoreState){ break;}
